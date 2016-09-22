@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://com.dataconnector/schema/DataConnectorMetadata"
+    xmlns:tns="http://com.dataconnector/schema/DataConnectorMetadata"
+    elementFormDefault="qualified">
+    <xsd:simpleType name="alias_field-def">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+    <xsd:complexType name="Field-def">
+        <xsd:sequence>
+            <xsd:element name="alias_field" type="tns:alias_field-def"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="Fields-def">
+        <xsd:sequence>
+            <xsd:element name="Field" type="tns:Field-def" maxOccurs="unbounded"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:simpleType name="alias_table-def">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+    <xsd:complexType name="table_override-def">
+        <xsd:sequence>
+            <xsd:element name="alias_table" type="tns:alias_table-def"></xsd:element>
+            <xsd:element name="Fields" type="tns:Fields-def" maxOccurs="1" minOccurs="0"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="DataConnectorMetadata-def">
+        <xsd:sequence>
+            <xsd:element name="Tables" type="tns:Tables-def"></xsd:element>
+            <xsd:element name="output_dir_jar" type="xsd:string"></xsd:element>
+            <xsd:element name="dir_lib" type="xsd:time"/>
+            <xsd:element name="JarInfoGenerate_def" type="tns:JarInfoGenerate-def"></xsd:element>
+            <xsd:element name="package_name_gen" type="xsd:string"></xsd:element>
+            <xsd:element name="jdbc_connection" type="tns:jdbc_connection-def"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="DataConnectorMetadata" type="tns:DataConnectorMetadata-def"></xsd:element>
+    <xsd:complexType name="Tables-def">
+        <xsd:sequence>
+            <xsd:element name="table_override" type="tns:table_override-def" maxOccurs="unbounded"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="JarInfoGenerate-def">
+        <xsd:sequence>
+            <xsd:element name="provider" type="xsd:string"></xsd:element>
+            <xsd:element name="version" type="xsd:string"></xsd:element>
+            <xsd:element name="nameFile" type="xsd:string"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="jdbc_connection-def">
+        <xsd:sequence>
+            <xsd:element name="driverClass" type="xsd:string"></xsd:element>
+            <xsd:element name="URL" type="xsd:string"></xsd:element>
+            <xsd:element name="usuario" type="xsd:string"></xsd:element>
+            <xsd:element name="password" type="xsd:string"></xsd:element>
+            <xsd:element name="schemaBD" type="xsd:string"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

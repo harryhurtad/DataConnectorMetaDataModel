@@ -1,0 +1,29 @@
+/**
+----------NO EDITAR-----------
+**/
+
+<#if package?? && package != "">
+package ${package};
+
+</#if>
+
+public class ${name_table} {
+
+    <#list atributos as atribut>   
+     private ${atribut.tipo} ${atribut.name};  
+    </#list>
+
+    <#list atributos as atributo>        
+        public ${atributo.tipo} get${atributo.name?substring(0,1)?upper_case}${atributo.name?substring(1)}(){
+            
+            return this.${atributo.name};
+        }
+
+        public void set${atributo.name?substring(0,1)?upper_case}${atributo.name?substring(1)} (${atributo.tipo} ${atributo.name} ) {
+
+            this.${atributo.name} =${atributo.name} ;
+        }
+		
+    </#list>
+
+}

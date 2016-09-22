@@ -1,0 +1,26 @@
+/**
+----------NO EDITAR-----------
+**/
+
+<#if package?? && package != "">
+package ${package};
+
+</#if>     
+
+    import com.dataconnector.commons.anotations.MetadataFielInfoDataConnector;
+    import com.dataconnector.commons.anotations.MetadataTableDataConnector;
+    import com.dataconnector.commons.metadata.MetadataFieldDataConnector;
+    import com.dataconnector.commons.metadata.MetdataTableDataConn;
+
+<#if table_rename?? && table_rename ==true>
+  @MetadataTableDataConnector(nameTabe="${table_original}")
+</#if>  
+ public class ${name_table} implements MetdataTableDataConn {
+
+     <#list atributos as atributo>
+    @MetadataFielInfoDataConnector(type="${atributo.tipo}" ,nameOriginal="${atributo.nameOriginal}")
+    public static  MetadataFieldDataConnector<${atributo.tipo}> ${atributo.name};
+
+    </#list>
+
+}

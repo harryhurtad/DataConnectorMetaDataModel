@@ -36,28 +36,32 @@ import java.util.logging.Logger;
 public class MetaDataDataconnector {
 
     private final Connection connection;
-    private  String nameTypeDriver;
+    private String nameTypeDriver;
     private final String esquemaBD;
     private DatabaseMetaData metadata;
     private ProvidersSupportEnum typeDatabase;
 
     private final Map<String, Map<String, AtributosDTO>> metadataBD;
-  
 
-    public MetaDataDataconnector(String esquemaBD, Connection con,String nameTypeDriver,ProvidersSupportEnum typeDatabase) {
+    public MetaDataDataconnector(String esquemaBD, Connection con, String nameTypeDriver, ProvidersSupportEnum typeDatabase) {
 
         this.connection = con;
         this.esquemaBD = esquemaBD;
-        this.nameTypeDriver=nameTypeDriver; 
+        this.nameTypeDriver = nameTypeDriver;
         metadataBD = new HashMap<>();
-        this.typeDatabase=typeDatabase;
-        
+        this.typeDatabase = typeDatabase;
+
     }
 
+    public MetaDataDataconnector(String esquemaBD, Connection con) {
+        this.connection = con;
+        this.esquemaBD = esquemaBD;
+        metadataBD = new HashMap<>();
+    }
 
     public void obtieneMetaDataBD() {
         try {
-        //    this.connection = getConnection();
+            //    this.connection = getConnection();
 
             metadata = connection.getMetaData();
 
@@ -70,6 +74,19 @@ public class MetaDataDataconnector {
         } catch (SQLException ex) {
             Logger.getLogger(MetaDataDataconnector.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Map<String, Map<String, AtributosDTO>> obtenerMetaDataBD() throws SQLException {
+
+        //    this.connection = getConnection();
+        metadata = connection.getMetaData();
+
+        obtieneTablasEsquema();
+        obtieneColumnasTablas();
+        System.out.println("Total tablas MetaData: " + metadataBD.size());
+
+        return metadataBD;
+
     }
 
     private void obtieneTablasEsquema() {
@@ -131,7 +148,7 @@ public class MetaDataDataconnector {
                     fkKey.setFktable(rsTypeKey.getString(METADATA_ENUM.FKTABLE_NAME.getString()));
                     //String nombreColumn = rsTypeKey.getString(METADATA_ENUM.FKCOLUMN_NAME.getString());
                     fkKey.setFkColumnName(rsTypeKey.getString(METADATA_ENUM.FKCOLUMN_NAME.getString()));
-                    String nombreColumn= rsTypeKey.getString(METADATA_ENUM.PKCOLUMN_NAME.getString());
+                    String nombreColumn = rsTypeKey.getString(METADATA_ENUM.PKCOLUMN_NAME.getString());
                     fkKey.setPkColumnName(rsTypeKey.getString(METADATA_ENUM.PKCOLUMN_NAME.getString()));
                     fkKey.setPkTableName(rsTypeKey.getString(METADATA_ENUM.PKTABLE_NAME.getString()));
 
@@ -166,12 +183,10 @@ public class MetaDataDataconnector {
      }*/
     private static void getNewInstanceDataConnector() {
         //TODO  Relizar lectura por archivo xml
-        
-       // metaDataDataconnector = new MetaDataDataconnector("employees", ConnectionHelper.getConnection(),"com.mysql.jdbc.Driver");
-    //       metaDataDataconnector = new MetaDataDataconnector("DBUnico", ConnectionHelper.getConnectionSQLServer(),"com.microsoft.sqlserver.jdbc.SQLServerDriver");
-    }
 
-    
+       // metaDataDataconnector = new MetaDataDataconnector("employees", ConnectionHelper.getConnection(),"com.mysql.jdbc.Driver");
+        //       metaDataDataconnector = new MetaDataDataconnector("DBUnico", ConnectionHelper.getConnectionSQLServer(),"com.microsoft.sqlserver.jdbc.SQLServerDriver");
+    }
 
     public Map<String, Map<String, AtributosDTO>> getMetadataBD() {
         return metadataBD;
@@ -185,6 +200,4 @@ public class MetaDataDataconnector {
         return typeDatabase;
     }
 
-    
-    
 }

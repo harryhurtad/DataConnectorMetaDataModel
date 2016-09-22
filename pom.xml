@@ -26,6 +26,19 @@
             <artifactId>sqljdbc4</artifactId>
             <version>4.1</version>
         </dependency>
+          <!-- JDK 1.7 tools -->
+        <dependency>
+            <groupId>com.oracle.jdk.tools</groupId>
+            <artifactId>com.oracle.jdk.tools</artifactId>
+            <version>1.7</version>
+    
+        </dependency>
+         <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.25-incubating</version>
+        </dependency>
+        
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Dataconnector-commons</artifactId>

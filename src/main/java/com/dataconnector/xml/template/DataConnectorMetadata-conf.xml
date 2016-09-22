@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : DataConnectorMetadata.xml
+    Created on : 24 de mayo de 2016, 03:32 PM
+    Author     : proveedor_hhurtado
+    Description:
+        Purpose of the document follows.
+-->
+
+<DataConnectorMetadata  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                        xmlns='http://com.dataconnector/schema/DataConnectorMetadata'
+                        xsi:schemaLocation='http://com.dataconnector/schema/DataConnectorMetadata DataConnectorMetadata.xsd'>
+    <output_dir_jar>C:\tmp\dataconnector_output</output_dir_jar>
+    <dir_lib>C:\tmp\lib</dir_lib>
+    <package_name_gen>com.prueba.dataconnector</package_name_gen>
+    <JarInfoGenerate_def>
+        <nameFile>DataConnectorMysqlMetadata</nameFile>
+        <provider>UNICO</provider>
+        <version>1.0</version>
+    </JarInfoGenerate_def>
+    <!-- Override de las tablas    -->
+    <Tables> 
+        <table_override id="dept_emp">
+            <alias_table>deptEmp</alias_table>
+            <Fields>
+                <Field id="emp_no">
+                    <alias_field>empId</alias_field>
+                </Field>
+                <Field id="dept_no">
+                    <alias_field>deptId</alias_field>
+                </Field>           
+            </Fields>
+        </table_override>
+        <table_override id="departments">
+            <alias_table>departPrueba</alias_table>       
+        </table_override>
+    </Tables>
+</DataConnectorMetadata>
