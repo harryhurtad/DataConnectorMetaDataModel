@@ -15,23 +15,26 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.38</version>
+          <!--  <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0.1</version>
+         <!--   <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>sqljdbc4</artifactId>
             <version>4.1</version>
+       <!--     <scope>provided</scope>-->
         </dependency>
           <!-- JDK 1.7 tools -->
         <dependency>
             <groupId>com.oracle.jdk.tools</groupId>
             <artifactId>com.oracle.jdk.tools</artifactId>
             <version>1.7</version>
-    
+      <!--      <scope>provided</scope>-->
         </dependency>
          <dependency>
             <groupId>org.freemarker</groupId>
@@ -43,6 +46,49 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>Dataconnector-commons</artifactId>
             <version>${project.version}</version>
+     <!--       <scope>provided</scope>-->
         </dependency>
     </dependencies>
+    <build>
+    <plugins>
+       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>     
+        <version>3.0.2</version>  
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>com.dataconnector.common.DataConnectorMetadataHelper</mainClass>
+            </manifest>
+          </archive>
+        </configuration>       
+      </plugin> 
+        
+      <!-- any other plugins -->
+     <!-- <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+            <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>com.dataconnector.common.DataConnectorMetadataHelper</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+        
+      </plugin>-->
+    </plugins>
+  </build>
 </project>
